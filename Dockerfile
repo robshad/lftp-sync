@@ -14,7 +14,7 @@ RUN mkdir -p /script && \
 
 ADD init/ /etc/my_init.d/
 RUN chmod -v +x /etc/service/*/run && \
-  chmod -v +x /etc/my_init.d/*.sh && \
+  chmod -v +x /etc/my_init.d/*.sh
   
 # Volumes and Ports
 VOLUME ["/target"]
