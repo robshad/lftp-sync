@@ -7,4 +7,4 @@ cat >/script/lftp-sync-service.sh <<EOL
 EOL
 echo "Wrote /script/lftp-sync-service.sh"
 
-crontab -l | { cat; echo "*/1 * * * * abc /script/lftp-sync-service.sh"; } | crontab -
+crontab -l | { cat; echo "*/1 * * * * /script/lftp-sync-service.sh"; } | crontab -

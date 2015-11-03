@@ -12,8 +12,8 @@ RUN mkdir -p /script && \
   chown -R abc:abc /script && \
   touch /script/lftp-sync-service.sh
 
-RUN wget -O /config/lftp-sync.sh 'https://raw.githubusercontent.com/robshad/lftp-sync/master/lftp-sync.sh' && \
-  wget -O /config/lftp-sync-defaults.cfg 'https://raw.githubusercontent.com/robshad/lftp-sync/master/lftp-sync-defaults.cfg' 
+RUN wget -v -O /config/lftp-sync.sh https://raw.githubusercontent.com/robshad/lftp-sync/master/lftp-sync.sh
+RUN wget -v -O /config/lftp-sync-defaults.cfg https://raw.githubusercontent.com/robshad/lftp-sync/master/lftp-sync-defaults.cfg
 
 ADD init/ /etc/my_init.d/
 RUN chmod -v +x /etc/service/*/run && \
