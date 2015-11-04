@@ -3,13 +3,13 @@
 #
 # lftp-sync:    A simple interface for using lftp to mirror remote data
 #               structures based on file modification times.
-# Author:       Joshua Smith
-# Contact:      <josh@stemwinder.net>
+# Author:       Rob Shad
+# Contact:      <robertmshad@googlemail.com>
 #
 # Changelog (sorted newest -> oldest):
-#   - 2015-03-01:   Adds support for OS X; Changes config file name; Adds
-#                   large changes to README.md
-#   - 2015-02-28:   Initial work on timespec syncing and logging
+#   - 2015-11-04:   Based this script off of stemwinder/lftp-sync
+#                   https://github.com/stemwinder/lftp-sync
+#                   Modified for use of docker with unRAID
 #
 ########################################################################
 
@@ -111,24 +111,14 @@ if [[ -z "$source_path" ]] || [[ -z "$target_path" ]]; then
   exit 1;
 fi
 
-trap "rm -f /tmp/lftp-sync.lock" SIGINT SIGTERM
-if [ -e /tmp/lftp-sync.lock ]
-then
-  exit 1
-else
-  touch /tmp/lftp-sync.lock
-  echo "Running LFTP Sync"
-  log "Begin script execution"
+echo "Running LFTP Sync"
+log "Begin script execution"
 
-  # execute lftp command
-  log "Start lftp sync"
-  lftp_command="lftp -c \"connect -u $username,$password sftp://$server:$port; set net:limit-total-rate $dl_limit:$ul_limit; mirror $lftp_mirror_args --verbose=$verbosity --parallel=$streams --use-pget-n=$segments \\\"$source_path\\\" \\\"$target_path\\\"; quit\""
-  log $lftp_command
-  eval $lftp_command 2>&1 | tee "$dir_name/$lftp_log_dir/$("$date_cmd" +"%Y-%m-%d_%H:%M:%S_%Z").log"
+# execute lftp command
+log "Start lftp sync"
+lftp_command="lftp -c \"connect -u $username,$password sftp://$server:$port; set net:limit-total-rate $dl_limit:$ul_limit; mirror $lftp_mirror_args --verbose=$verbosity --parallel=$streams --use-pget-n=$segments \\\"$source_path\\\" \\\"$target_path\\\"; quit\""
+log $lftp_command
+eval $lftp_command 2>&1
 
-  # exit script with success code
-  log "Script execution complete"
-
-  rm -f /tmp/lftp-sync.lock
-  exit 0
-fi
+# exit script with success code
+log "Script execution complete"

@@ -20,7 +20,7 @@ fi
 EOL
 echo "Wrote /script/lftp-sync-service.sh"
 
-wget -v -O /config/lftp-sync.sh https://raw.githubusercontent.com/stemwinder/lftp-sync/master/lftp-sync.sh
+wget -v -O /config/lftp-sync.sh https://raw.githubusercontent.com/robshad/lftp-sync/master/lftp-sync.sh
 echo "Wrote /config/lftp-sync.sh"
 
 wget -v -O /config/lftp-sync-defaults.cfg https://raw.githubusercontent.com/robshad/lftp-sync/master/lftp-sync-defaults.cfg
