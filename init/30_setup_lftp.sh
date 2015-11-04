@@ -16,4 +16,4 @@ echo "Wrote /config/lftp-sync-default.cfg"
 chmod -v +x /config/lftp-sync.sh
 chmod -v +x /script/lftp-sync-service.sh
 
-crontab -l | { cat; echo "*/1 * * * * /script/lftp-sync-service.sh"; } | crontab -
+crontab -l | { cat; echo "$(printenv CRON) /script/lftp-sync-service.sh"; } | crontab -
