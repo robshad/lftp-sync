@@ -12,8 +12,6 @@ RUN chmod -v +x /etc/service/*/run && \
    
   mkdir -p /script && \
   mkdir -p /config/lftp-output && \
-  chown -R abc:abc /config && \
-  chown -R abc:abc /script && \
   touch /script/lftp-sync-service.sh
   
 # Volumes and Ports
