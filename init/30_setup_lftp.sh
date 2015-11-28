@@ -30,5 +30,6 @@ chown -R abc:abc /config
 chown -R abc:abc /script
 chmod -v +x /config/lftp-sync.sh
 chmod -v +x /script/lftp-sync-service.sh
+rm -f /tmp/lftp-sync.lock
 
 crontab -l | { cat; echo "$(printenv CRON) /script/lftp-sync-service.sh"; } | crontab -
